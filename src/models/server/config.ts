@@ -1,15 +1,33 @@
-import {Client, Avatars, Storage, Users, Databases } from "node-appwrite";
-import env from "@/app/env"
-const client = new Client();
+import env from "@/app/env";
+
+const { Avatars, Client, Databases, Storage, Users } = require('node-appwrite');
+
+let client = new Client();
 
 client
-    .setEndpoint(env.appwrite.endpoint)
-    .setProject(env.appwrite.projectId)
-    .setKey(env.appwrite.apikey);
+    .setEndpoint(`${process.env.NEXT_PUBLIC_APPWRITE_HOST_URL}`) // Your API Endpoint
+    .setProject(`${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`) // Your project ID
+    .setKey(`${process.env.APPWRITE_API_KEY}`) // Your secret API key
 
-const users = new Users(client);
-const databases = new Databases(client);
+    ;
+
+const databases = new Databases(client)
 const avatars = new Avatars(client);
 const storage = new Storage(client);
+const users = new Users(client)
 
-export {client, users, storage, databases, avatars}
+
+export { client, databases, users, avatars, storage }
+
+
+
+
+
+
+
+
+
+
+
+
+
